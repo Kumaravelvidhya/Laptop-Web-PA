@@ -1,0 +1,63 @@
+﻿@model ClassLibrary.Models.CricketersModels
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+@*
+<h4>CricketersModels</h4>*@
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="cricketersId" class="control-label"></label>
+                <input asp-for="cricketersId" class="form-control" />
+                <span asp-validation-for="cricketersId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Age" class="control-label"></label>
+                <input asp-for="Age" class="form-control" />
+                <span asp-validation-for="Age" class="text-danger"></span>
+            </div>
+          @*  <div class="form-group">
+                <label asp-for="Country" class="control-label"></label>
+                <input asp-for="Country" class="form-control" />
+                <span asp-validation-for="Country" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="Country" class="control-label"></label>
+                <select class="form-control" asp-for="Country" asp-items="@(new SelectList(Model.CountryName,"countryId","country"))">
+                    <option>--Select CountryName--</option>
+                </select>
+                <span asp-validation-for="CountryName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TotalMatchs" class="control-label"></label>
+                <input asp-for="TotalMatchs" class="form-control" />
+                <span asp-validation-for="TotalMatchs" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TotalRun" class="control-label"></label>
+                <input asp-for="TotalRun" class="form-control" />
+                <span asp-validation-for="TotalRun" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="List">Back to List</a>
+</div>
+

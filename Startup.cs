@@ -50,7 +50,7 @@ namespace MVC
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Laptop}/{action=Index}/{id?}");
+                    pattern: "{controller=cricketers}/{action=List}/{id?}");
             });
         }
     }
