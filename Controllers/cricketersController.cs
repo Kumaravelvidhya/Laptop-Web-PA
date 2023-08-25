@@ -36,7 +36,7 @@ namespace MVC.Controllers
         public ActionResult Create(string Name)
         {
             var model = new CricketersModels();
-            model.CountryName = objcountry.  ();
+            model.CountryName = objcountry.Getcountryname();
             return View("Create",model);
             
         }
