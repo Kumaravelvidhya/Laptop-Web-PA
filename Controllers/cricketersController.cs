@@ -27,9 +27,19 @@ namespace MVC.Controllers
         // GET: cricketersController/Details/5
         public ActionResult Details(int cricketersId)
         {
-            var res = objcricketers.selectwithid(cricketersId);
-            return View("Details", res);
-            
+            try
+            {
+                var res = objcricketers.selectwithid(cricketersId);
+                return View("Details", res);
+            }
+            catch(Exception ex)
+            {
+                return View("Error");
+
+
+            }
+
+
         }
 
         // GET: cricketersController/Create
@@ -48,18 +58,26 @@ namespace MVC.Controllers
         {
             try
             {
-                if(ModelState.IsValid)
+                if (ModelState.IsValid)
+                {
+                    if (objcricketers.IsExists(data.Name))
                     {
+                        ModelState.AddModelError("Name", "Name Already exists");
+                        data.CountryName = objcountry.Getcountryname();
+                        return View("Create", data);
+                    }
+
                     objcricketers.Insertcricketers(data);
                     return RedirectToAction(nameof(List));
                 }
+
                 else
                 {
                     data.CountryName = objcountry.Getcountryname();
-                    return View("Create", data);
+                    return View("Create",data);
                 }
-                  //objcricketers.Insertcricketers(data);
-                  // return RedirectToAction(nameof(List));
+                //objcricketers.Insertcricketers(data);
+                // return RedirectToAction(nameof(List));
             }
             catch (Exception ex)
             {
@@ -70,11 +88,21 @@ namespace MVC.Controllers
         // GET: cricketersController/Edit/5
         public ActionResult Edit(int cricketersId)
         {
+            try
+            {
+                var result = objcricketers.selectwithid(cricketersId);
+                result.CountryName = objcountry.Getcountryname();
+                return View("Edit", result);
 
-            var result = objcricketers.selectwithid(cricketersId);
-            result.CountryName = objcountry.Getcountryname();
-            return View("Edit", result);
-            
+            }
+            catch(Exception ex)
+            {
+                return View("Error");
+
+            }
+
+
+
         }
 
         // POST: cricketersController/Edit/5
@@ -86,9 +114,25 @@ namespace MVC.Controllers
         {
             try
             {
-                collect.cricketersId = cricketersId;
-                objcricketers.Update(collect);
-                return RedirectToAction(nameof(List));
+                if (ModelState.IsValid)
+                {
+                    if (objcricketers.ValidUpdate(collect.Name, collect.cricketersId))
+                    {
+                        ModelState.AddModelError("Name", "Name Already exists");
+                        collect.CountryName = objcountry.Getcountryname();
+                        return View("Create", collect);
+
+                    }  
+                }
+                    else
+                    
+                    collect.cricketersId = cricketersId;
+                    objcricketers.Update(collect);
+                    return RedirectToAction(nameof(List));
+
+                  
+               
+
             }
             catch (Exception ex)
             {
@@ -108,12 +152,12 @@ namespace MVC.Controllers
         // POST: cricketersController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int cricketersId, CricketersModels emp)
+        public ActionResult Remove(int cricketersId)
         {
             try
             {
 
-                objcricketers.selectwithid(cricketersId);
+                objcricketers.Delete(cricketersId);
                 return RedirectToAction(nameof(List));
             }
             catch
