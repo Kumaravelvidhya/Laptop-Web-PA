@@ -5,11 +5,22 @@
 }
 
 <h1>List</h1>
+@section scripts {
+
+    <script>$(document).ready(function () {
+
+            alert('pop');
+
+            $('#customerDatatable').dataTable({
+            });
+        });</script>
+
+}
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
+<table id="customerDatatable" class="table">
     <thead>
         <tr>
             <th>
@@ -21,9 +32,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Age)
             </th>
-           @* <th>
-                @Html.DisplayNameFor(model => model.Country)
-            </th>*@
+            @* <th>
+                    @Html.DisplayNameFor(model => model.Country)
+                </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.Country)
             </th>
@@ -38,36 +49,37 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.cricketersId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Age)
-            </td>
-          @*  <td>
-                @Html.DisplayFor(modelItem => item.Country)
-            </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.Country)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TotalMatchs)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TotalRun)
-            </td>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cricketersId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Age)
+                </td>
+                @*  <td>
+                        @Html.DisplayFor(modelItem => item.Country)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.Country)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalMatchs)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalRun)
+                </td>
 
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { cricketersId = item.cricketersId }) |
-                @Html.ActionLink("Details", "Details", new { id = item.cricketersId }) |
-                @Html.ActionLink("Delete", "Delete", new { cricketersId = item.cricketersId  })
-            </td>
-        </tr>
-}
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { cricketersId = item.cricketersId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.cricketersId }) |
+                    @Html.ActionLink("Delete", "Delete", new { cricketersId = item.cricketersId })
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

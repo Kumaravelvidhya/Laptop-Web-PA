@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MVC.Controllers
 {
-    public class cricketersController : Controller
+    public class cricketersController : Controller  
     {
         // GET: cricketersController
           public CricketersRepository objcricketers;
@@ -42,8 +42,8 @@ namespace MVC.Controllers
 
         }
 
-        // GET: cricketersController/Create
-        public ActionResult Create(string Name)
+        // GET: cricketersController/Create 
+        public ActionResult Create()
         {
             var model = new CricketersModels();
             model.CountryName = objcountry.Getcountryname();
